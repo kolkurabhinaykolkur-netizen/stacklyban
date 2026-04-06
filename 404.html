@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>404 | Page Not Found</title>
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+/* BODY */
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#141033,#1f1645,#2b1f66);
+color:white;
+text-align:center;
+}
+
+/* CONTAINER */
+.container{
+max-width:500px;
+padding:30px;
+}
+
+/* 404 TEXT */
+.error-code{
+font-size:100px;
+font-weight:bold;
+color:#9f97ff;
+}
+
+/* TITLE */
+h1{
+font-size:28px;
+margin:10px 0;
+}
+
+/* MESSAGE */
+p{
+color:#ccc;
+margin-bottom:25px;
+}
+
+/* BUTTON */
+.btn{
+display:inline-block;
+padding:12px 25px;
+background:linear-gradient(90deg,#7b6cff,#4b3fd1);
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+opacity:.9;
+}
+
+/* SMALL TEXT */
+.small{
+margin-top:15px;
+font-size:13px;
+color:#aaa;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+.error-code{
+font-size:70px;
+}
+h1{
+font-size:22px;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="error-code">404</div>
+
+<h1>Page Not Found</h1>
+
+<p>
+Oops! The page you are looking for doesn’t exist or has been moved.
+</p>
+
+<a href="index.html" class="btn">Go to Home</a>
+
+<div class="small">
+Stackly Bank • Secure Online Banking
+</div>
+
+</div>
+
+</body>
+</html>

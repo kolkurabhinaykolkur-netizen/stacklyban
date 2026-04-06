@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Bank Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI;}
+
+/* BODY */
+body{
+display:flex;
+background:#141033;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:240px;
+background:#1f1645;
+padding:20px;
+position:fixed;
+height:100%;
+left:0;
+transition:.3s;
+z-index:1000;
+}
+
+.sidebar h2{color:#9f97ff;margin-bottom:20px;}
+
+.sidebar a{
+display:block;
+color:#ccc;
+padding:10px;
+margin:8px 0;
+border-radius:6px;
+cursor:pointer;
+}
+
+.sidebar a:hover{
+background:#7b6cff;
+color:white;
+}
+
+/* MOBILE SIDEBAR */
+.close-btn{
+display:none;
+font-size:20px;
+margin-bottom:10px;
+cursor:pointer;
+}
+
+/* MAIN */
+.main{
+margin-left:240px;
+width:100%;
+max-width:100%;
+overflow:hidden;
+}
+
+/* TOPBAR */
+.topbar{
+background:#1f1645;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.hamburger{
+display:none;
+font-size:22px;
+cursor:pointer;
+}
+
+.email{color:#9f97ff;}
+
+.exit{
+background:#ff4d6d;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+color:white;
+cursor:pointer;
+}
+
+/* CARDS */
+.cards{
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.card{
+background:#2a2060;
+padding:20px;
+border-radius:10px;
+}
+
+/* CHARTS */
+.charts{
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+}
+
+.chart-box{
+background:#2a2060;
+padding:15px;
+border-radius:10px;
+width:100%;
+overflow:hidden;
+}
+
+canvas{
+max-width:100% !important;
+}
+
+/* TABLE */
+.table-section{
+padding:20px;
+overflow-x:auto;
+}
+
+table{
+width:100%;
+background:#2a2060;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #3a2d85;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+.sidebar{left:-240px;}
+.sidebar.active{left:0;}
+
+.main{margin-left:0;}
+
+.hamburger{display:block;}
+.close-btn{display:block;}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+
+<div class="close-btn" onclick="closeSidebar()">✖</div>
+
+<h2>Stackly Admin</h2>
+
+<a onclick="loadDashboard()">Dashboard</a>
+<a onclick="loadTransactions()">Transactions</a>
+<a onclick="loadRecords()">Records</a>
+<a onclick="loadCustomers()">Customers</a>
+<a onclick="loadAnalytics()">Analytics</a>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="topbar">
+
+<div style="display:flex;gap:10px;align-items:center;">
+<div class="hamburger" onclick="openSidebar()">☰</div>
+<h3 id="pageTitle">Admin Dashboard</h3>
+</div>
+
+<div>
+<span class="email" id="userEmail"></span>
+<button class="exit" onclick="location.href='index.html'">Exit</button>
+</div>
+
+</div>
+
+<div id="content"></div>
+
+</div>
+
+<script>
+
+/* EMAIL */
+document.getElementById("userEmail").innerText =
+localStorage.getItem("loggedEmail")
+
+/* SIDEBAR */
+function openSidebar(){
+document.getElementById("sidebar").classList.add("active")
+}
+function closeSidebar(){
+document.getElementById("sidebar").classList.remove("active")
+}
+
+/* DASHBOARD */
+function loadDashboard(){
+
+document.getElementById("pageTitle").innerText="Dashboard"
+
+document.getElementById("content").innerHTML=`
+
+<div class="cards">
+<div class="card">Balance: ₹1,25,000</div>
+<div class="card">Transactions: 320</div>
+<div class="card">Credit Score: 780</div>
+<div class="card">Loans: 2 Active</div>
+</div>
+
+<div class="charts">
+<div class="chart-box"><canvas id="c1"></canvas></div>
+<div class="chart-box"><canvas id="c2"></canvas></div>
+</div>
+`
+
+new Chart(c1,{
+type:"line",
+data:{
+labels:["Jan","Feb","Mar","Apr"],
+datasets:[{
+label:"Balance Growth",
+data:[50000,80000,100000,125000],
+borderColor:"#7b6cff",
+backgroundColor:"rgba(123,108,255,0.2)",
+fill:true
+}]
+}
+})
+
+new Chart(c2,{
+type:"bar",
+data:{
+labels:["Food","Shopping","Bills","Travel"],
+datasets:[{
+label:"Expenses",
+data:[20000,15000,10000,8000],
+backgroundColor:"#9f97ff"
+}]
+}
+})
+
+}
+
+/* TRANSACTIONS */
+function loadTransactions(){
+
+document.getElementById("pageTitle").innerText="Transactions"
+
+document.getElementById("content").innerHTML=`
+
+<div class="cards">
+<div class="card">Credit: ₹80,000</div>
+<div class="card">Debit: ₹45,000</div>
+</div>
+
+<div class="charts">
+<div class="chart-box"><canvas id="c3"></canvas></div>
+</div>
+`
+
+new Chart(c3,{
+type:"doughnut",
+data:{
+labels:["Credit","Debit"],
+datasets:[{
+data:[80000,45000],
+backgroundColor:["#7b6cff","#ff4d6d"]
+}]
+}
+})
+
+}
+
+/* RECORDS */
+function loadRecords(){
+
+document.getElementById("pageTitle").innerText="Records"
+
+document.getElementById("content").innerHTML=`
+
+<div class="table-section">
+<table>
+<tr><th>Type</th><th>Amount</th></tr>
+<tr><td>Deposit</td><td>₹50,000</td></tr>
+<tr><td>Withdrawal</td><td>₹10,000</td></tr>
+</table>
+</div>
+
+<div class="charts">
+<div class="chart-box"><canvas id="c4"></canvas></div>
+</div>
+`
+
+new Chart(c4,{
+type:"bar",
+data:{
+labels:["Deposit","Withdraw"],
+datasets:[{
+label:"Records",
+data:[50,10],
+backgroundColor:"#7b6cff"
+}]
+}
+})
+
+}
+
+/* CUSTOMERS */
+function loadCustomers(){
+
+document.getElementById("pageTitle").innerText="Customers"
+
+document.getElementById("content").innerHTML=`
+
+<div class="cards">
+<div class="card">Active: 1200</div>
+<div class="card">New: 150</div>
+</div>
+
+<div class="charts">
+<div class="chart-box"><canvas id="c5"></canvas></div>
+</div>
+`
+
+new Chart(c5,{
+type:"pie",
+data:{
+labels:["Active","New"],
+datasets:[{
+data:[1200,150],
+backgroundColor:["#7b6cff","#9f97ff"]
+}]
+}
+})
+
+}
+
+/* ANALYTICS */
+function loadAnalytics(){
+
+document.getElementById("pageTitle").innerText="Analytics"
+
+document.getElementById("content").innerHTML=`
+
+<div class="charts">
+<div class="chart-box"><canvas id="c6"></canvas></div>
+</div>
+`
+
+new Chart(c6,{
+type:"line",
+data:{
+labels:["Mon","Tue","Wed","Thu"],
+datasets:[{
+label:"Transactions",
+data:[200,400,350,500],
+borderColor:"#9f97ff",
+backgroundColor:"rgba(159,151,255,0.2)",
+fill:true
+}]
+}
+})
+
+}
+
+/* DEFAULT */
+loadDashboard()
+
+</script>
+
+</body>
+</html>

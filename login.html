@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly Bank | Secure Login</title>
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+/* BODY */
+body{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#141033,#1d1540,#2b1f66);
+padding:20px;
+}
+
+/* CONTAINER */
+.container{
+background:#1f1645;
+width:100%;
+max-width:420px;
+padding:35px;
+border-radius:16px;
+box-shadow:0 15px 40px rgba(0,0,0,0.5);
+color:#ffffff;
+}
+
+/* LOGO */
+.logo{
+text-align:center;
+margin-bottom:10px;
+}
+
+.logo img{
+width:120px;
+}
+
+/* TITLE */
+h2{
+text-align:center;
+margin-bottom:10px;
+color:#ffffff;
+}
+
+/* SUBTEXT */
+.sub-text{
+text-align:center;
+font-size:14px;
+color:#cfcde8;
+margin-bottom:20px;
+}
+
+/* LABEL */
+label{
+font-weight:600;
+font-size:14px;
+display:block;
+margin-bottom:6px;
+color:#dcdaf5;
+}
+
+/* INPUT */
+input,select{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #3a2d85;
+border-radius:8px;
+font-size:15px;
+outline:none;
+background:#2a2060;
+color:#fff;
+transition:0.3s;
+}
+
+/* PLACEHOLDER */
+input::placeholder{
+color:#aaa;
+}
+
+/* FOCUS */
+input:focus,select:focus{
+border-color:#7b6cff;
+box-shadow:0 0 6px rgba(123,108,255,0.5);
+background:#2f2570;
+}
+
+/* PASSWORD */
+.password-box{
+position:relative;
+}
+
+.password-box span{
+position:absolute;
+right:12px;
+top:12px;
+cursor:pointer;
+color:#bdb8ff;
+}
+
+/* BUTTON */
+button{
+width:100%;
+padding:13px;
+background:linear-gradient(90deg,#7b6cff,#4b3fd1);
+border:none;
+color:white;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+transition:0.3s;
+}
+
+button:hover{
+opacity:.9;
+}
+
+/* BACK BUTTON */
+.back-btn{
+background:#3a2d85;
+color:#fff;
+}
+
+.back-btn:hover{
+background:#4b3fd1;
+}
+
+/* BUTTON GROUP */
+.btn-group{
+display:flex;
+gap:10px;
+}
+
+/* FORGOT */
+.forgot{
+text-align:right;
+margin-top:-10px;
+margin-bottom:15px;
+}
+
+.forgot a{
+font-size:13px;
+color:#9f97ff;
+text-decoration:none;
+}
+
+.forgot a:hover{
+text-decoration:underline;
+}
+
+/* REGISTER */
+.register{
+text-align:center;
+margin-top:12px;
+font-size:14px;
+color:#ccc;
+}
+
+.register a{
+color:#9f97ff;
+font-weight:600;
+}
+
+/* MOBILE */
+@media (max-width:480px){
+.container{
+padding:25px;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+<img src="images/loo.webp" alt="Stackly Bank Logo">
+</div>
+
+<h2>Stackly Bank Login</h2>
+
+<p class="sub-text">
+Secure access to your online banking dashboard
+</p>
+
+<form id="loginForm">
+
+<label>Login As</label>
+
+<select id="role" required>
+<option value="">Select Role</option>
+<option value="admin">Bank Admin</option>
+<option value="user">Customer</option>
+</select>
+
+<label>Email Address</label>
+<input type="email" id="email" placeholder="Enter your email" required>
+
+<label>Password</label>
+
+<div class="password-box">
+<input type="password" id="password" required>
+<span onclick="togglePassword()">👁</span>
+</div>
+
+<div class="forgot">
+<a href="404.html">Forgot Password?</a>
+</div>
+
+<div class="btn-group">
+<button type="button" class="back-btn" onclick="goBack()">Back</button>
+<button type="submit">Login</button>
+</div>
+
+</form>
+
+<div class="register">
+Don't have an account? <a href="register.html">Register</a>
+</div>
+
+</div>
+
+<script>
+
+/* BACK */
+function goBack(){
+window.location.href="index.html"
+}
+
+/* PASSWORD TOGGLE */
+function togglePassword(){
+let field=document.getElementById("password")
+field.type = field.type === "password" ? "text" : "password"
+}
+
+/* LOGIN */
+document.getElementById("loginForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+let email=document.getElementById("email").value.trim()
+let password=document.getElementById("password").value.trim()
+let role=document.getElementById("role").value
+
+let user=JSON.parse(localStorage.getItem("stacklyUser"))
+
+if(user && email===user.email && password===user.password && role===user.role){
+
+localStorage.setItem("loggedEmail",email)
+
+if(role==="admin"){
+window.location.href="admin-dashboard.html"
+}else{
+window.location.href="user-dashboard.html"
+}
+
+}else{
+alert("Invalid login credentials")
+}
+
+})
+
+</script>
+
+</body>
+</html>

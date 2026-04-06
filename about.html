@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+ <!-- LEFT -->
+ <div class="logo">
+  <a href="index.html">
+    <img src="images/loo.webp" alt="Stackly Logo">
+  </a>
+</div>
+
+  <!-- CENTER NAV -->
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="nav-right">
+    <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
+    <div class="hamburger" id="hamburger">☰</div>
+  </div>
+
+</nav>
+
+<!-- MOBILE SIDE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+
+  <div class="menu-header">
+    <div class="logo">Stackly</div>
+    <div class="close-btn" id="closeBtn">✕</div>
+  </div>
+
+  <div class="menu-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div class="menu-buttons">
+   <button class="login-btn" onclick="window.location.href='login.html'">Log In</button>
+<button class="cta" onclick="window.location.href='404.html'">Get Started</button>
+  </div>
+
+</div>
+
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+
+
+
+
+
+
+<section class="stackly-hero">
+
+  <div class="stackly-hero-content">
+    <span class="stackly-tag">ABOUT US</span>
+
+    <h1 class="stackly-title">
+      Empowering Financial Journey:<br>
+      <span class="stackly-gradient">Welcome to Online Banking.</span>
+    </h1>
+
+    <button class="stackly-btn" onclick="window.location.href='404.html'">
+  Explore More
+</button>
+  </div>
+
+</section>
+
+
+
+<script>
+function scrollToNext() {
+  document.getElementById("nextSection").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="stackly-mission">
+
+  <!-- LEFT IMAGE -->
+  <div class="stackly-mission-left">
+    <img src="images/circle.webp" alt="Stackly Banking">
+  </div>
+
+  <!-- RIGHT CONTENT -->
+  <div class="stackly-mission-right">
+
+    <span class="stackly-badge">STACKLY BANKING</span>
+
+    <h2 class="stackly-heading">
+      Empowering Financial Freedom.
+    </h2>
+
+    <p class="stackly-text">
+      Stackly provides a secure and seamless online banking experience.
+      Manage your finances, track transactions, and grow your savings
+      with our modern digital platform.
+    </p>
+
+    <p class="stackly-text">
+      Enjoy fast transactions, real-time insights, and trusted security
+      designed for your financial success.
+    </p>
+
+   <button class="stackly-btn" onclick="window.location.href='404.html'">
+  Know More →
+</button>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="stackly-stats">
+
+  <h2 class="stackly-stats-title">
+    Revolutionizing Banking <span>Through Online Innovation</span>
+  </h2>
+
+  <div class="stackly-stats-container">
+
+    <div class="stackly-stat-box">
+      <div class="stackly-circle">
+        <h3 class="counter" data-target="25">0</h3><span>+</span>
+      </div>
+      <p>Years of Experience</p>
+    </div>
+
+    <div class="stackly-stat-box">
+      <div class="stackly-circle">
+        <h3 class="counter" data-target="25">0</h3><span>+</span>
+      </div>
+      <p>Projects Completed</p>
+    </div>
+
+    <div class="stackly-stat-box">
+      <div class="stackly-circle">
+        <h3 class="counter" data-target="36">0</h3><span>+</span>
+      </div>
+      <p>Investors Partners</p>
+    </div>
+
+    <div class="stackly-stat-box">
+      <div class="stackly-circle">
+        <h3 class="counter" data-target="2000">0</h3><span>+</span>
+      </div>
+      <p>Global Users</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+<script>
+const counters = document.querySelectorAll(".counter");
+
+counters.forEach(counter => {
+  const updateCount = () => {
+    const target = +counter.getAttribute("data-target");
+    const count = +counter.innerText;
+
+    const speed = 50;
+    const increment = target / speed;
+
+    if (count < target) {
+      counter.innerText = Math.ceil(count + increment);
+      setTimeout(updateCount, 30);
+    } else {
+      counter.innerText = target;
+    }
+  };
+
+  updateCount();
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="stackly-values">
+
+  <!-- LEFT SIDE -->
+  <div class="stackly-values-left">
+
+    <span class="stackly-badge">STACKLY VALUES</span>
+
+    <h2 class="stackly-title">
+      Our Commitment to your Prosperity
+    </h2>
+
+    <p class="stackly-desc">
+      Stackly ensures secure, fast, and reliable online banking solutions.
+      We help you manage finances with trust, innovation, and simplicity.
+    </p>
+
+  <button class="stackly-btn" onclick="window.location.href='404.html'">
+  Know More →
+</button>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="stackly-values-right">
+
+    <div class="stackly-card">
+      <div class="icon blue"><i class="fas fa-check-circle"></i></div>
+      <h3>Be Secure</h3>
+      <p>Your data and transactions are protected with top security.</p>
+    </div>
+
+    <div class="stackly-card">
+      <div class="icon red"><i class="fas fa-chart-line"></i></div>
+      <h3>Grow Wealth</h3>
+      <p>Smart tools to help you invest and grow financially.</p>
+    </div>
+
+    <div class="stackly-card">
+      <div class="icon pink"><i class="fas fa-comment-dots"></i></div>
+      <h3>Instant Alerts</h3>
+      <p>Get real-time notifications for all transactions.</p>
+    </div>
+
+    <div class="stackly-card">
+      <div class="icon purple"><i class="fas fa-cogs"></i></div>
+      <h3>Smart Control</h3>
+      <p>Manage everything easily with advanced features.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="stackly-about">
+
+  <!-- LEFT CONTENT -->
+  <div class="stackly-about-left">
+
+    <span class="stackly-badge">ABOUT US</span>
+
+    <h1 class="stackly-title">
+      Secure Your Financial Future Now!
+    </h1>
+
+    <p class="stackly-desc">
+      Stackly provides secure and modern online banking solutions.
+      Manage your finances easily with advanced tools and real-time insights.
+    </p>
+
+    <!-- POINTS -->
+    <ul class="stackly-list">
+      <li>✔ Manage your finance securely</li>
+      <li>✔ Safest banking system nowadays</li>
+    </ul>
+
+<button class="stackly-btn" onclick="window.location.href='404.html'">
+  Know More →
+</button>
+
+  </div>
+
+  <!-- RIGHT IMAGE -->
+  <div class="stackly-about-right">
+    <img src="images/lines.webp" alt="Stackly Banking">
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="stackly-team">
+
+  <span class="stackly-badge">OUR TEAM</span>
+  <h2 class="stackly-title">Our Leadership</h2>
+
+  <div class="stackly-team-container">
+
+    <!-- MEMBER 1 -->
+    <div class="stackly-member">
+      <div class="stackly-img">
+        <img src="images/T1 (1).webp" alt="Team Member">
+      </div>
+      <h3>John Smith</h3>
+      <p>CEO & Founder</p>
+    </div>
+
+    <!-- MEMBER 2 -->
+    <div class="stackly-member">
+      <div class="stackly-img">
+        <img src="images/T1 (2).webp" alt="Team Member">
+      </div>
+      <h3>David Lee</h3>
+      <p>CTO</p>
+    </div>
+
+    <!-- MEMBER 3 -->
+    <div class="stackly-member">
+      <div class="stackly-img">
+        <img src="images/T1 (3).webp" alt="Team Member">
+      </div>
+      <h3>Emma Watson</h3>
+      <p>Marketing Head</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- LEFT -->
+    <div class="footer-about">
+<div class="logo">
+  <a href="index.html">
+    <img src="images/loo.webp" alt="Stackly Logo">
+  </a>
+</div>
+      <p>
+        Stackly provides modern digital solutions for secure and fast banking experience.
+      </p>
+
+     <div class="social-icons">
+  <i class="fab fa-facebook-f" onclick="socialClick('facebook')"></i>
+  <i class="fab fa-twitter" onclick="socialClick('twitter')"></i>
+  <i class="fab fa-linkedin-in" onclick="socialClick('linkedin')"></i>
+  <i class="fab fa-youtube" onclick="socialClick('youtube')"></i>
+</div>
+
+<script>
+function socialClick(platform){
+  window.location.href = "404.html";
+}
+</script>
+    </div>
+
+    <!-- LINKS -->
+    <div class="footer-links">
+      <h4>Products</h4>
+      <a href="about.html">About</a>
+      <a href="404.html">Careers</a>
+      <a href="404.html">Terms</a>
+      <a href="404.html">News</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Company</h4>
+      <a href="404.html">Invoicing</a>
+      <a href="404.html">Office Hours</a>
+      <a href="404.html">Explore</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Resources</h4>
+      <a href="404.html">SaaS</a>
+      <a href="404.html">Business</a>
+      <a href="404.html">Tutorials</a>
+      <a href="404.html">Secure</a>
+    </div>
+
+  </div>
+  <!-- BOTTOM -->
+  <div class="footer-bottom">
+    <p>© 2026 Stackly. All rights reserved.</p>
+    <div>
+      <a href="404.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+
+</footer>
+
+<script>
+
+function openAccount(){
+  window.location.href = "404.html";
+}
+
+// SCROLL TO TOP BUTTON (if you have button)
+function scrollToTop(){
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+</script>
+
+
+
+
+
+
+
+<!-- FONT AWESOME -->
+
+<script src="main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+  <!-- LEFT -->
+  <!-- LEFT -->
+ <div class="logo">
+  <a href="index.html">
+    <img src="images/loo.webp" alt="Stackly Logo">
+  </a>
+</div>
+
+  <!-- CENTER NAV -->
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="nav-right">
+<button class="login-btn" onclick="window.location.href='login.html'">Login</button>
+    <div class="hamburger" id="hamburger">☰</div>
+  </div>
+
+</nav>
+
+<!-- MOBILE SIDE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+
+  <div class="menu-header">
+    <div class="logo">Stackly</div>
+    <div class="close-btn" id="closeBtn">✕</div>
+  </div>
+
+  <div class="menu-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div class="menu-buttons">
+    <button class="login-btn" onclick="window.location.href='login.html'">Log In</button>
+<button class="cta" onclick="window.location.href='404.html'">Get Started</button>
+  </div>
+
+</div>
+
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+
+
+
+<section class="stk-contact-hero">
+
+  <div class="stk-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="stk-left">
+
+      <p class="stk-breadcrumb">
+        HOME  >  <span>CONTACT</span>
+      </p>
+
+      <h1 class="stk-title">
+        We'd <span class="stk-gradient1">love to</span><br>
+        <span class="stk-gradient2">Connect</span> With Stackly.
+      </h1>
+
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="stk-right">
+      <p>
+        At Stackly, we help businesses build scalable digital solutions, 
+        streamline operations, and deliver seamless user experiences. 
+        Reach out to us for collaboration, support, or innovative ideas.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+<section class="stk-contact">
+
+  <div class="stk-main">
+
+    <!-- LEFT FORM -->
+    <div class="stk-form-box">
+
+      <form id="stkForm" class="stk-form">
+
+        <div class="stk-row">
+          <input type="text" id="firstName" placeholder="First Name*" required>
+          <input type="text" id="lastName" placeholder="Last Name*" required>
+        </div>
+
+        <div class="stk-row">
+          <input type="email" id="email" placeholder="Business Email*" required>
+          <input type="text" id="phone" placeholder="Phone Number*" required>
+        </div>
+
+        <input type="text" id="company" placeholder="Company Name*" required>
+
+        <select id="employees" required>
+          <option value="">Number of Employees*</option>
+          <option>1-10</option>
+          <option>10-50</option>
+          <option>50+</option>
+        </select>
+
+        <input type="text" id="country" placeholder="Country*" required>
+
+        <button type="submit">SEND MESSAGE</button>
+
+      </form>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="stk-info">
+
+      <span class="stk-badge">CONTACT US</span>
+
+      <h2 class="stk-title">Get in Touch!</h2>
+
+      <p class="stk-desc">
+        Stackly helps businesses scale with cloud, DevOps, and modern web solutions.
+        Let’s connect and build something amazing together.
+      </p>
+
+      <div class="stk-item">
+        <div class="stk-icon stk-blue">📧</div>
+        <div>
+          <h4>E-MAIL ADDRESS</h4>
+          <p>contact@stackly.com</p>
+        </div>
+      </div>
+
+      <div class="stk-item">
+        <div class="stk-icon stk-red">📞</div>
+        <div>
+          <h4>PHONE NUMBER</h4>
+          <p>+91 9876543210</p>
+        </div>
+      </div>
+
+      <div class="stk-item">
+        <div class="stk-icon stk-purple">📍</div>
+        <div>
+          <h4>LOCATION</h4>
+          <p>Bangalore, India</p>
+        </div>
+      </div>
+
+      <div class="stk-item">
+        <div class="stk-icon stk-pink">💼</div>
+        <div>
+          <h4>CAREERS</h4>
+          <p>careers@stackly.com</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+// ONLY LETTERS
+function onlyLetters(e) {
+  e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+}
+
+// ONLY NUMBERS (10 DIGITS)
+function onlyNumbers(e) {
+  let val = e.target.value.replace(/\D/g, "");
+  e.target.value = val.slice(0, 10);
+}
+
+// APPLY EVENTS
+document.getElementById("firstName").addEventListener("input", onlyLetters);
+document.getElementById("lastName").addEventListener("input", onlyLetters);
+document.getElementById("company").addEventListener("input", onlyLetters);
+document.getElementById("country").addEventListener("input", onlyLetters);
+
+document.getElementById("phone").addEventListener("input", onlyNumbers);
+
+// EMAIL VALIDATION
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// FORM SUBMIT
+document.getElementById("stkForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
+
+  if (!email || !phone) {
+    alert("Please fill the form!");
+    return;
+  }
+
+  if (!validEmail(email)) {
+    alert("Enter valid email!");
+    return;
+  }
+
+  if (phone.length !== 10) {
+    alert("Phone must be 10 digits!");
+    return;
+  }
+
+  // SUCCESS REDIRECT
+  window.location.href = "404.html";
+});
+
+
+</script>
+
+
+
+
+<section class="stk-map">
+
+  <iframe 
+    src="https://www.google.com/maps?q=Madhapur,Hyderabad&output=embed"
+    width="100%" 
+    height="400" 
+    style="border:0; border-radius:12px;"
+    allowfullscreen="" 
+    loading="lazy">
+  </iframe>
+
+</section>
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- LEFT -->
+    <div class="footer-about">
+    <div class="logo">
+  <a href="index.html">
+    <img src="images/loo.webp" alt="Stackly Logo">
+  </a>
+</div>
+      <p>
+        Stackly provides modern digital solutions for secure and fast banking experience.
+      </p>
+
+      <div class="social-icons">
+  <i class="fab fa-facebook-f" onclick="socialClick('facebook')"></i>
+  <i class="fab fa-twitter" onclick="socialClick('twitter')"></i>
+  <i class="fab fa-linkedin-in" onclick="socialClick('linkedin')"></i>
+  <i class="fab fa-youtube" onclick="socialClick('youtube')"></i>
+</div>
+
+<script>
+function socialClick(platform){
+  window.location.href = "404.html";
+}
+</script>
+    </div>
+
+    
+    <!-- LINKS -->
+    <div class="footer-links">
+      <h4>Products</h4>
+      <a href="about.html">About</a>
+      <a href="404.html">Careers</a>
+      <a href="404.html">Terms</a>
+      <a href="404.html">News</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Company</h4>
+      <a href="404.html">Invoicing</a>
+      <a href="404.html">Office Hours</a>
+      <a href="404.html">Explore</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Resources</h4>
+      <a href="404.html">SaaS</a>
+      <a href="404.html">Business</a>
+      <a href="404.html">Tutorials</a>
+      <a href="404.html">Secure</a>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="footer-bottom">
+    <p>© 2026 Stackly. All rights reserved.</p>
+    <div>
+      <a href="404.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+
+</footer>
+
+<script>
+
+ function openAccount(){
+  window.location.href = "404.html";
+}
+
+// SCROLL TO TOP BUTTON (if you have button)
+function scrollToTop(){
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+</script>
+
+
+
+
+
+
+
+<!-- FONT AWESOME -->
+
+<script src="main.js"></script>
+
+</body>
+</html>

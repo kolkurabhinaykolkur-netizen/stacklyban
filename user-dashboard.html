@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly User Banking Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI;}
+
+/* BODY */
+body{
+display:flex;
+background:#141033;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:240px;
+background:#1f1645;
+padding:25px;
+position:fixed;
+height:100%;
+left:0;
+top:0;
+transition:0.3s;
+z-index:1000;
+}
+
+.sidebar h2{
+color:#9f97ff;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+padding:10px;
+margin:10px 0;
+color:#ccc;
+border-radius:6px;
+cursor:pointer;
+}
+
+.sidebar a:hover{
+background:#7b6cff;
+color:white;
+}
+
+/* CLOSE BTN */
+.close-btn{
+display:none;
+font-size:20px;
+margin-bottom:15px;
+cursor:pointer;
+color:#9f97ff;
+}
+
+/* MAIN */
+.main{
+margin-left:240px;
+width:calc(100% - 240px);
+min-height:100vh;
+transition:0.3s;
+}
+
+/* TOPBAR */
+.topbar{
+background:#1f1645;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #2a2060;
+}
+
+.hamburger{
+display:none;
+font-size:22px;
+cursor:pointer;
+}
+
+.email{
+color:#9f97ff;
+font-size:14px;
+}
+
+.exit{
+background:#ff4d6d;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+color:white;
+cursor:pointer;
+}
+
+/* GRID */
+.section-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
+
+/* CARD */
+.card{
+background:#2a2060;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(123,108,255,0.3);
+}
+
+/* CHART */
+.chart-box{
+background:#2a2060;
+padding:20px;
+border-radius:10px;
+}
+
+canvas{
+width:100% !important;
+}
+
+/* TABLE */
+.table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+.table th,.table td{
+padding:10px;
+border-bottom:1px solid #3a2d85;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+.sidebar{left:-240px;}
+.sidebar.active{left:0;}
+
+.close-btn{display:block;}
+
+.main{
+margin-left:0;
+width:100%;
+}
+
+.hamburger{display:block;}
+
+.topbar{
+flex-wrap:wrap;
+gap:10px;
+}
+
+.email{
+font-size:12px;
+max-width:120px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+<div class="close-btn" onclick="closeSidebar()">✖</div>
+
+<h2>Stackly Bank</h2>
+<a onclick="loadDashboard()">Dashboard</a>
+<a onclick="loadActivity()">Transactions</a>
+<a onclick="loadProfile()">Profile</a>
+<a onclick="loadReports()">Reports</a>
+<a onclick="loadSettings()">Settings</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="topbar">
+<div style="display:flex;gap:10px;align-items:center;">
+<div class="hamburger" onclick="openSidebar()">☰</div>
+<h3 id="pageTitle">Dashboard</h3>
+</div>
+
+<div>
+<span class="email" id="userEmail"></span>
+<button class="exit" onclick="logout()">Logout</button>
+</div>
+</div>
+
+<div id="content"></div>
+
+</div>
+
+<script>
+
+/* EMAIL */
+document.getElementById("userEmail").innerText =
+localStorage.getItem("loggedEmail")
+
+/* SIDEBAR */
+function openSidebar(){sidebar.classList.add("active")}
+function closeSidebar(){sidebar.classList.remove("active")}
+
+/* LOGOUT */
+function logout(){window.location.href="index.html"}
+
+/* DASHBOARD */
+function loadDashboard(){
+
+pageTitle.innerText="User Banking Dashboard"
+
+content.innerHTML=`
+<div class="section-grid">
+
+<div class="card"><h3>Account Balance</h3><p>₹1,25,000</p></div>
+<div class="card"><h3>Available Balance</h3><p>₹1,10,000</p></div>
+<div class="card"><h3>Account No</h3><p>XXXX1234</p></div>
+<div class="card"><h3>Last Login</h3><p>Today</p></div>
+
+<div class="card"><h3>Transactions</h3><p>320</p></div>
+<div class="card"><h3>Credit Score</h3><p>780</p></div>
+<div class="card"><h3>Loans</h3><p>2</p></div>
+<div class="card"><h3>Savings</h3><p>₹25,000</p></div>
+
+<div class="chart-box"><canvas id="c1"></canvas></div>
+<div class="chart-box"><canvas id="c2"></canvas></div>
+<div class="chart-box"><canvas id="c7"></canvas></div>
+<div class="chart-box"><canvas id="c8"></canvas></div>
+
+</div>
+`
+
+new Chart(c1,{type:"line",data:{labels:["Jan","Feb","Mar"],datasets:[{data:[50000,90000,125000],borderColor:"#7b6cff",fill:true}]}})
+new Chart(c2,{type:"bar",data:{labels:["Food","Bills"],datasets:[{data:[20000,15000],backgroundColor:"#9f97ff"}]}})
+new Chart(c7,{type:"doughnut",data:{labels:["Savings","Expense"],datasets:[{data:[70,30],backgroundColor:["#7b6cff","#ff4d6d"]}]}})
+new Chart(c8,{type:"pie",data:{labels:["UPI","Card"],datasets:[{data:[60,40],backgroundColor:["#9f97ff","#00c6ff"]}]}})
+
+}
+
+/* TRANSACTIONS */
+function loadActivity(){
+
+pageTitle.innerText="Transactions"
+
+content.innerHTML=`
+<div class="section-grid">
+
+<div class="card"><h3>Credit</h3><p>₹80,000</p></div>
+<div class="card"><h3>Debit</h3><p>₹45,000</p></div>
+<div class="card"><h3>UPI</h3><p>120</p></div>
+<div class="card"><h3>Cards</h3><p>85</p></div>
+
+<div class="chart-box"><canvas id="c3"></canvas></div>
+<div class="chart-box"><canvas id="c9"></canvas></div>
+
+</div>
+`
+
+new Chart(c3,{type:"doughnut",data:{labels:["Credit","Debit"],datasets:[{data:[80,20],backgroundColor:["#7b6cff","#ff4d6d"]}]}})
+new Chart(c9,{type:"line",data:{labels:["Mon","Tue"],datasets:[{data:[10,20],borderColor:"#00c6ff"}]}})
+
+}
+
+/* PROFILE */
+function loadProfile(){
+
+pageTitle.innerText="Profile"
+
+content.innerHTML=`
+<div class="section-grid">
+
+<div class="card"><h3>Name</h3><p>Abhinay</p></div>
+<div class="card"><h3>Email</h3><p>${localStorage.getItem("loggedEmail")}</p></div>
+<div class="card"><h3>Account</h3><p>Savings</p></div>
+<div class="card"><h3>KYC</h3><p>Verified</p></div>
+
+<div class="chart-box"><canvas id="p1"></canvas></div>
+
+</div>
+`
+
+new Chart(p1,{type:"pie",data:{labels:["Savings","Expenses"],datasets:[{data:[80,20],backgroundColor:["#7b6cff","#ff4d6d"]}]}})
+
+}
+
+/* REPORTS */
+function loadReports(){
+
+pageTitle.innerText="Reports"
+
+content.innerHTML=`
+<div class="section-grid">
+
+<div class="card"><h3>Statements</h3><p>Generated</p></div>
+<div class="card"><h3>Downloads</h3><p>24</p></div>
+
+<div class="chart-box"><canvas id="r1"></canvas></div>
+
+</div>
+`
+
+new Chart(r1,{type:"line",data:{labels:["Jan","Feb"],datasets:[{data:[30,50],borderColor:"#7b6cff"}]}})
+
+}
+
+/* SETTINGS */
+function loadSettings(){
+
+pageTitle.innerText="Settings"
+
+content.innerHTML=`
+<div class="section-grid">
+
+<div class="card"><h3>Security</h3><p>High</p></div>
+<div class="card"><h3>Notifications</h3><p>On</p></div>
+
+<div class="chart-box"><canvas id="s1"></canvas></div>
+
+</div>
+`
+
+new Chart(s1,{type:"doughnut",data:{labels:["On","Off"],datasets:[{data:[75,25],backgroundColor:["#7b6cff","#ff4d6d"]}]}})
+
+}
+
+/* DEFAULT */
+window.onload = loadDashboard;
+
+</script>
+
+</body>
+</html>

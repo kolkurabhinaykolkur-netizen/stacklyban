@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly Bank | Register</title>
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+/* BODY */
+body{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#141033,#1d1540,#2b1f66);
+padding:20px;
+}
+
+/* CONTAINER */
+.container{
+background:#1f1645;
+width:100%;
+max-width:420px;
+padding:35px;
+border-radius:16px;
+box-shadow:0 15px 40px rgba(0,0,0,0.5);
+color:#ffffff;
+}
+
+/* LOGO */
+.logo{
+text-align:center;
+margin-bottom:10px;
+}
+
+.logo img{
+width:110px;
+}
+
+/* TITLE */
+h2{
+text-align:center;
+margin-bottom:20px;
+color:#ffffff;
+}
+
+/* LABEL */
+label{
+font-weight:600;
+font-size:14px;
+display:block;
+margin-bottom:6px;
+color:#dcdaf5;
+}
+
+/* INPUT */
+input,select{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:1px solid #3a2d85;
+border-radius:8px;
+font-size:15px;
+outline:none;
+background:#2a2060;
+color:#fff;
+transition:0.3s;
+}
+
+/* PLACEHOLDER */
+input::placeholder{
+color:#aaa;
+}
+
+/* FOCUS */
+input:focus,select:focus{
+border-color:#7b6cff;
+box-shadow:0 0 6px rgba(123,108,255,0.5);
+background:#2f2570;
+}
+
+/* ERROR */
+.error{
+color:#ff6b6b;
+font-size:12px;
+margin-bottom:8px;
+display:none;
+}
+
+.input-error{
+border-color:#ff6b6b;
+}
+
+/* PASSWORD */
+.password-box{
+position:relative;
+}
+
+.password-box span{
+position:absolute;
+right:12px;
+top:12px;
+cursor:pointer;
+color:#bdb8ff;
+}
+
+/* BUTTON */
+button{
+width:100%;
+padding:13px;
+margin-top:10px;
+background:linear-gradient(90deg,#7b6cff,#4b3fd1);
+border:none;
+color:white;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+transition:0.3s;
+}
+
+button:hover{
+opacity:.9;
+}
+
+/* SUCCESS */
+.success{
+text-align:center;
+color:#7bffb0;
+margin-top:10px;
+}
+
+/* LOGIN */
+.login{
+text-align:center;
+margin-top:12px;
+font-size:14px;
+color:#ccc;
+}
+
+.login a{
+color:#9f97ff;
+font-weight:600;
+}
+
+/* MOBILE */
+@media (max-width:480px){
+.container{
+padding:25px;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+<img src="images/loo.webp">
+</div>
+
+<h2>Create Stackly Bank Account</h2>
+
+<form id="registerForm">
+
+<label>Full Name</label>
+<input type="text" id="name" placeholder="Enter your name">
+<div class="error" id="nameError">Only alphabets allowed</div>
+
+<label>Email Address</label>
+<input type="email" id="email" placeholder="Enter your email">
+<div class="error" id="emailError">Enter valid email</div>
+
+<label>Phone Number</label>
+<input type="text" id="phone" placeholder="Enter phone number">
+<div class="error" id="phoneError">Phone must be 10 digits</div>
+
+<label>Role</label>
+<select id="role">
+<option value="">Select Role</option>
+<option value="admin">Bank Admin</option>
+<option value="user">Customer</option>
+</select>
+<div class="error" id="roleError">Please select role</div>
+
+<label>Password</label>
+
+<div class="password-box">
+<input type="password" id="password">
+<span onclick="togglePassword('password')">👁</span>
+</div>
+<div class="error" id="passwordError">Password required</div>
+
+<label>Confirm Password</label>
+
+<div class="password-box">
+<input type="password" id="confirmPassword">
+<span onclick="togglePassword('confirmPassword')">👁</span>
+</div>
+<div class="error" id="confirmPasswordError">Passwords do not match</div>
+
+<button>Create Account</button>
+
+</form>
+
+<p class="success" id="successMsg"></p>
+
+<div class="login">
+Already have account? <a href="login.html">Login</a>
+</div>
+
+</div>
+
+<script>
+
+/* PASSWORD TOGGLE */
+function togglePassword(id){
+let field=document.getElementById(id)
+field.type = field.type==="password" ? "text" : "password"
+}
+
+/* NAME VALIDATION */
+document.getElementById("name").addEventListener("input",function(){
+this.value=this.value.replace(/[^a-zA-Z ]/g,'')
+})
+
+/* PHONE VALIDATION */
+document.getElementById("phone").addEventListener("input",function(){
+this.value=this.value.replace(/[^0-9]/g,'')
+if(this.value.length>10){
+this.value=this.value.slice(0,10)
+}
+})
+
+/* FORM SUBMIT */
+document.getElementById("registerForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+let valid=true
+
+let name=document.getElementById("name")
+let email=document.getElementById("email")
+let phone=document.getElementById("phone")
+let role=document.getElementById("role")
+let password=document.getElementById("password")
+let confirmPassword=document.getElementById("confirmPassword")
+
+let emailPattern=/^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+
+/* RESET */
+document.querySelectorAll(".error").forEach(e=>e.style.display="none")
+document.querySelectorAll("input,select").forEach(e=>e.classList.remove("input-error"))
+
+/* VALIDATIONS */
+if(name.value.trim()===""){
+name.classList.add("input-error")
+document.getElementById("nameError").style.display="block"
+valid=false
+}
+
+if(!email.value.match(emailPattern)){
+email.classList.add("input-error")
+document.getElementById("emailError").style.display="block"
+valid=false
+}
+
+if(phone.value.length!==10){
+phone.classList.add("input-error")
+document.getElementById("phoneError").style.display="block"
+valid=false
+}
+
+if(role.value===""){
+role.classList.add("input-error")
+document.getElementById("roleError").style.display="block"
+valid=false
+}
+
+if(password.value===""){
+password.classList.add("input-error")
+document.getElementById("passwordError").style.display="block"
+valid=false
+}
+
+if(password.value!==confirmPassword.value){
+confirmPassword.classList.add("input-error")
+document.getElementById("confirmPasswordError").style.display="block"
+valid=false
+}
+
+if(!valid) return
+
+/* SAVE USER */
+let user={
+name:name.value,
+email:email.value,
+phone:phone.value,
+role:role.value,
+password:password.value
+}
+
+localStorage.setItem("stacklyUser",JSON.stringify(user))
+
+document.getElementById("successMsg").innerText="Account created successfully"
+
+/* REDIRECT */
+setTimeout(()=>{
+window.location.href="login.html"
+},2000)
+
+})
+
+</script>
+
+</body>
+</html>
